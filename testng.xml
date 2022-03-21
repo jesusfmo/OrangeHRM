@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true" name="/Users/macbook/IdeaProjects/OrangeHRM">
+        <classes>
+            <class name="loginTestCases.TC1_validCredentials">
+                <methods>
+                    <include name="TC_01_loginSuccess"/>
+                </methods>
+            </class>
+            <class name="loginTestCases.TC2_invalidUsername">
+                <methods>
+                    <include name="TC_02_invalidUsername"/>
+                </methods>
+            </class>
+            <class name="loginTestCases.TC3_invalidPassword">
+                <methods>
+                    <include name="TC_03_invalidUsername"/>
+                </methods>
+            </class>
+            <class name="loginTestCases.TC4_loginLogout">
+                <methods>
+                    <include name="TC_01_loginSuccess"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
