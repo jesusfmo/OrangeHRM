@@ -1,4 +1,4 @@
-package navigationBarTestCases;
+package menuBarTestCases;
 
 import dirverSetUp.chromeDriverSetUp;
 import globalVariables.setGlobalVariables;
@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertTrue;
 
-public class TC7_navigateToLeavePage {
+public class TC5_navigateToAdminPage {
 
     WebDriver driver = chromeDriverSetUp.setupDriver();
 
@@ -37,12 +37,12 @@ public class TC7_navigateToLeavePage {
     }
 
     @Test
-    public void TC_06_navigateToUsers() {
+    public void TC_05_navigateToUsers() {
 
-        dashboard.navigateToLeaveBarOptions(); //Click on Leave option in the bar
+        dashboard.navigateToAdminBarOptions(); //Click on Admin option in the bar
 
-        WebElement SystemUsersTxt = driver.findElement(By.xpath("//h1[contains(text(),'Leave List')]"));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[contains(text(),'Leave List')]")));
+        WebElement SystemUsersTxt = driver.findElement(By.xpath("//h1[contains(text(),'System Users')]"));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[contains(text(),'System Users')]")));
         assertTrue(SystemUsersTxt.isDisplayed());
     }
 

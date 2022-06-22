@@ -1,4 +1,4 @@
-package navigationBarTestCases;
+package menuBarTestCases;
 
 import dirverSetUp.chromeDriverSetUp;
 import globalVariables.setGlobalVariables;
@@ -15,7 +15,7 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertTrue;
 
-public class TC5_navigateToAdminPage {
+public class TC6_navigateToPimPage {
 
     WebDriver driver = chromeDriverSetUp.setupDriver();
 
@@ -37,12 +37,12 @@ public class TC5_navigateToAdminPage {
     }
 
     @Test
-    public void TC_05_navigateToUsers() {
+    public void TC_06_navigateToUsers() {
 
-        dashboard.navigateToAdminBarOptions(); //Click on Admin option in the bar
+        dashboard.navigateToPimBarOptions(); //Click on PIM option in the bar
 
-        WebElement SystemUsersTxt = driver.findElement(By.xpath("//h1[contains(text(),'System Users')]"));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[contains(text(),'System Users')]")));
+        WebElement SystemUsersTxt = driver.findElement(By.xpath("//h1[contains(text(),'Employee Information')]"));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[contains(text(),'Employee Information')]")));
         assertTrue(SystemUsersTxt.isDisplayed());
     }
 
