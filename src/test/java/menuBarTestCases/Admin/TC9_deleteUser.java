@@ -4,7 +4,6 @@ import dirverSetUp.chromeDriverSetUp;
 import globalVariables.setGlobalVariables;
 import navigationPages.dashboardPage;
 import navigationPages.loginPage;
-import org.apache.maven.surefire.shared.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,6 +12,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 import static org.testng.Assert.assertTrue;
 
@@ -39,25 +40,28 @@ public class TC9_deleteUser {
     }
 
     @Test
-    public void TC_09_deleteUser() throws InterruptedException {
+    public void TC_09_deleteUser() {
 
-        //This is working, but tomorrow find a better way to optimize it, it's weak
+        //java.util.List<WebElement> UsrChckBox = driver.findElements(By.name("chkSelectRow[]"));
+        //UsrChckBox.get(1).click();
 
-        java.util.List<WebElement> links = driver.findElements(By.name("chkSelectRow[]"));
-        System.out.println(links.size());
-        links.get(3).click();
+        //Find all user's checkboxes in the page
+        List<WebElement> AllUsers = driver.findElements(By.name("chkSelectRow[]"));
+        AllUsers.get(1).click();
 
-        Thread.sleep(2000);
+        //Wait until Delete button is displayed
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@id='btnDelete']")));
 
         WebElement DeleteUsrBtn = driver.findElement(By.xpath("//input[@id='btnDelete']")); //Identify "Delete" button to delete a user
         DeleteUsrBtn.click(); //Click on "Delete" button
 
-        Thread.sleep(2000);
+        //Wait for delete dialog popup to be visible
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='deleteConfModal']")));
 
         WebElement DeleteUsrOkBtn = driver.findElement(By.xpath("//input[@id='dialogDeleteBtn']")); //Identify "Delete" button to delete a user
         DeleteUsrOkBtn.click(); //Click on "Delete" button
 
-        //Corroborate user is created expecting "Successfully Saved" message
+        //Corroborate user is created expecting "Successfully Deleted" message
         WebElement SuccessMsg = driver.findElement(By.xpath("//div[contains(.,'Successfully Deleted')]"));
         wait.until(ExpectedConditions.visibilityOf(SuccessMsg));
         assertTrue(SuccessMsg.isDisplayed());
