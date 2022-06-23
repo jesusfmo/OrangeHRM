@@ -14,7 +14,6 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class TC8_addNewUser {
@@ -40,19 +39,22 @@ public class TC8_addNewUser {
     }
 
     @Test
-    public void TC_08_navigateToUsers() {
+    public void TC_08_addNewUser() {
 
         //Comment all code and make it better, change the assertions to Assert 'Successfully Saved' JS text
-        WebElement AddUserBtn = driver.findElement(By.xpath("//input[@id='btnAdd']"));
-        AddUserBtn.click();
+        WebElement AddUserBtn = driver.findElement(By.xpath("//input[@id='btnAdd']")); //Identify "Add" button to add new user
+        AddUserBtn.click(); //Click on "Add" button
 
+        //Corroborate Add users pages is displayed
         WebElement AddUserTxt = driver.findElement(By.xpath("//h1[@id='UserHeading']"));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[@id='UserHeading']")));
         assertTrue(AddUserTxt.isDisplayed());
 
+        //Submit an already known employee name
         WebElement SubmitEmployeeName = driver.findElement(By.xpath("//input[@id='systemUser_employeeName_empName']"));
         SubmitEmployeeName.sendKeys("Aaliyah Haq");
 
+        //Submit username, create a random string, it may contain letters and numbers depending on the selection
         WebElement SubmitUsername = driver.findElement(By.xpath("//input[@id='systemUser_userName']"));
         int length = 10;
         boolean useLetters = true;
@@ -60,18 +62,25 @@ public class TC8_addNewUser {
         String generatedString = RandomStringUtils.random(length, useLetters, useNumbers);
         SubmitUsername.sendKeys(generatedString);
 
+        //Submit and repeat password
         WebElement SubmitPassword = driver.findElement(By.xpath("//input[@id='systemUser_password']"));
         SubmitPassword.sendKeys("password");
 
         WebElement ConfirmPassword = driver.findElement(By.xpath("//input[@id='systemUser_confirmPassword']"));
         ConfirmPassword.sendKeys("password");
 
+        //Save created user
         WebElement SaveBtn = driver.findElement(By.xpath("//input[@id='btnSave']"));
         SaveBtn.click();
 
-        WebElement SuccessTxt = driver.findElement(By.xpath("//a[contains(text(),'>')]"));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),'>')]")));
-        assertTrue(SuccessTxt.isDisplayed());
+        //Corroborate user is created expecting "Successfully Saved" message
+        WebElement SuccessMsg = driver.findElement(By.xpath("//div[contains(.,'Successfully Saved')]"));
+        wait.until(ExpectedConditions.visibilityOf(SuccessMsg));
+        assertTrue(SuccessMsg.isDisplayed());
+
+        //Another way to look for Success Message
+        //By xpath = By.xpath("//div[contains(.,'Successfully Saved')]");
+        //WebElement element = (new WebDriverWait(driver,5)).until(ExpectedConditions.presenceOfElementLocated(xpath));
     }
 
     @AfterTest
