@@ -38,19 +38,18 @@ public class TC10_addNewJobTitle {
     @BeforeTest
     public void startWebDriver() {
 
-        //Hovering needs to be fixed
         driver.get(setGlobalVariables.HOME_PAGE); //Call homepage
         driver.manage().window().maximize();
         login.login(user, password); //send credentials
+
         //Navigation to Job Title is made through hovering for this test case
-        dashboard.navigateToAdminBarOptions(); //Click on Admin option in the bar
         Actions actions = new Actions(driver);
         WebElement AdminBar = driver.findElement(By.xpath("//a[@id='menu_admin_viewAdminModule']"));
         wait.until(ExpectedConditions.visibilityOf(AdminBar));
-        actions.moveToElement(AdminBar);
+        actions.moveToElement(AdminBar).perform();
         WebElement JobOpt = driver.findElement(By.xpath("//a[@id='menu_admin_Job']"));
         wait.until(ExpectedConditions.visibilityOf(JobOpt));
-        actions.moveToElement(JobOpt);
+        actions.moveToElement(JobOpt).perform();
         WebElement JobTitle = driver.findElement(By.xpath("//a[@id='menu_admin_viewJobTitleList']"));
         wait.until(ExpectedConditions.visibilityOf(JobTitle));
         JobTitle.click();
