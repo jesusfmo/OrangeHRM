@@ -35,6 +35,9 @@ public class dashboardPage {
     private WebElement MaintenanceBtn;
     @FindBy(xpath="//a[@id='menu_buzz_viewBuzz']")
     private WebElement BuzzBtn;
+    @FindBy(xpath = "//input[@id='MP_link']")
+    private WebElement MarketBtn;
+
 
    //Navigate to Menu options
     public void navigateToAdminBarOptions() {
@@ -71,5 +74,9 @@ public class dashboardPage {
 
     public void navigateToBuzzBarOptions() {
         BuzzBtn.click();
+    }
+
+    public void navigateToMarketplace() {
+        MarketBtn.click();
     }
 }
